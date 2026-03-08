@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    
+    <style>
+        /* Base page styling */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden; /* Prevents scrollbars when confetti falls */
+        }
+
+        /* The birthday card container */
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            max-width: 90%;
+            width: 400px;
+            z-index: 10; /* Keeps the card above the confetti */
+        }
+
+        /* Typography */
+        h1 {
+            color: #ff4757;
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #2f3542;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* Interactive Button */
+        button {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+        }
+
+        button:hover {
+            background-color: #ff6b81;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.6);
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            p { font-size: 1.05rem; }
+            .card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>HAPPY BIRTHDAY "MYYYY DEARR    PILTUUUU❤️"</h1>
+        <p> I loveeee yyouuu sooo veryy veryyy muchhhh alwayssss myyy janemannn Acheee seee raha kariooo samjhee khiyall v rakha karoo or khana waana mast se thusa karoo or groww karte raho or hamare sath paglami v karte rho SAMJHIIIIII🔪 </p>
+        <button id="confettiBtn">SUIIIII💕</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        // 1. Trigger a big fireworks confetti effect as soon as the page loads
+        window.onload = function() {
+            var duration = 20 * 5000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+              return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+              var timeLeft = animationEnd - Date.now();
+
+              if (timeLeft <= 0) {
+                return clearInterval(interval);
+              }
+
+              var particleCount = 50 * (timeLeft / duration);
+              // Fire from the left
+              confetti(Object.assign({}, defaults, { particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+              }));
+              // Fire from the right
+              confetti(Object.assign({}, defaults, { particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+              }));
+            }, 250);
+        };
+
+        // 2. Trigger an explosion of confetti when the button is clicked
+        document.getElementById('confettiBtn').addEventListener('click', () => {
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#ffffff']
+            });
+        });
+    </script>
+</body>
+</html>
